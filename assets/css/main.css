@@ -1532,39 +1532,54 @@ section,
 
 
 
-
+/* Portfolio container (grid layout) */
 .portfolio-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile default: 1 column */
   gap: 40px;
   margin-top: 10px;
 }
 
-/* Project Card Layout */
+/* ≥1024px: Desktop (2 cards per row) */
+@media (min-width: 1024px) {
+  .portfolio-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Project Card */
 .project-card {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  background: rgba(246,250, 253);
+  background: rgba(246, 250, 253, 1);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+@media (min-width: 768px) {
+  .project-card {
+    flex-direction: row; /* side-by-side layout */
+    text-align: left;
+  }
 }
 
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Project Info */
 .project-info {
   flex: 1;
 }
 
 .project-label {
   font-size: 14px;
+  font-weight: 600;
   color: #72bed8;
   margin: 0 0 8px;
   text-transform: uppercase;
@@ -1579,55 +1594,52 @@ section,
 }
 
 .project-description {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   opacity: 0.9;
   margin-bottom: 16px;
   color: #000000;
 }
 
+/* Links */
 .project-links a {
+  display: inline-block;
   margin-right: 12px;
-  font-size: 20px;
-  color: #a50000;
-  transition: color 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .project-links a:hover {
-  color: #1db954; /* Spotify green */
+  transform: scale(1.05);
 }
 
+/* Project Image */
 .project-image {
   flex: 1;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .project-image {
+    margin-top: 0;
+    margin-left: 20px;
+  }
 }
 
 .project-image img {
-  max-width: 100%;
+  max-width: 80%;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive (stack vertically on small screens) */
-@media (max-width: 768px) {
-  .project-card {
-    flex-direction: column;
-    text-align: center;
-  }
-
-
+/* Responsive tweaks */
 @media (max-width: 480px) {
   .project-title {
-    font-size: 20px;
+    font-size: 18px;
   }
-
   .project-description {
     font-size: 14px;
   }
 }
-  .project-image {
-    margin-top: 20px;
-  }
-} 
